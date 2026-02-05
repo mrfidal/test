@@ -273,7 +273,7 @@ delete_old_onion() {
         local timestamp=$(date +%Y%m%d_%H%M%S)
         local backup_path="$BACKUP_DIR/${SERVICE_NAME}_${timestamp}"
         
-        echo -e "${WHITE} [${YELLOW}+${WHITE}] ${YELLOW}Backing up old hidden service to: $backup_path"
+        echo -e "${WHITE} [${YELLOW}+${WHITE}] ${YELLOW}Backing up old hidden service..."
         
         # Backup hostname file if it exists
         if [ -f "$HS_DIR/hostname" ]; then
@@ -567,10 +567,12 @@ main() {
                 echo -e "${WHITE} ╠══════════════════════════════════════════════════════════════╣"
                 echo -e "${WHITE}  ${GREEN}  New Onion Address: ${CYAN}http://${ONION}                ${WHITE}"
                 echo -e "${WHITE}  ${GREEN}  Local Port       : ${CYAN}${PORT}                                  ${WHITE}"
-                echo -e "${WHITE}  ${GREEN}  Service Directory: ${CYAN}${HS_DIR}${WHITE}"
+                if [ -n "$CUSTOM_TEXT" ]; then
+                    echo -e "${WHITE}  ${GREEN}  Custom Config    : ${CYAN}Added${WHITE}                                    "
+                fi
                 echo -e "${WHITE} ╚══════════════════════════════════════════════════════════════╝${RESET}"
                 echo -e "\n${WHITE} [${GREEN}+${WHITE}] ${GREEN}Make sure you have a service running on port ${PORT}"
-                echo -e "${WHITE} [${BLUE}i${WHITE}] ${BLUE}Old onion address has been backed up to: ${BACKUP_DIR}/${RESET}"
+                echo -e "${WHITE} [${BLUE}i${WHITE}] ${BLUE}Old onion address has been backed up"
                 
                 # Save new onion to backup directory for reference
                 mkdir -p "$BACKUP_DIR"
